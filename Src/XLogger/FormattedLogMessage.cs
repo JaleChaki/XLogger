@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace Logging {
-	public struct FormattedLogMessage {
+	public class FormattedLogMessage {
 
-		public string Message;
+		public readonly LogMessage PrimaryMessage;
 
-		public LogLevel Level;
+		public readonly string FormattedMessage;
+
+		public LogLevel Level => PrimaryMessage.Level;
+
+		public FormattedLogMessage(string message, LogMessage primaryMessage) {
+			this.FormattedMessage = message;
+			this.PrimaryMessage = primaryMessage;
+		}
 
 	}
 }

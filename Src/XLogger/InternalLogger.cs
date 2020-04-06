@@ -1,9 +1,13 @@
-﻿using System;
+﻿using Logging.Formatters;
+using Logging.LogMethods;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Logging {
 	internal static class InternalLogger {
+
+		public static IFormatter StringFormatter { get; set; }
 
 		public static void LogString(string log, LogLevel level) {
 
@@ -19,6 +23,12 @@ namespace Logging {
 				return;
 			}
 
+		}
+
+		private static void InvokeMethods(FormattedLogMessage formattedLog, IEnumerable<ILogMethod> methods) {
+			foreach (var m in methods) {
+				m.Write(formattedLog);
+			}
 		}
 
 	}

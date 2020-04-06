@@ -10,7 +10,6 @@ namespace Logging.Formatters {
 
 		public static IDictionary<Type, ExceptionFormatter> ConcreteExceptionFormatters;
 
-
 		static ExceptionFormattersManager() {
 			ConcreteExceptionFormatters = new Dictionary<Type, ExceptionFormatter>();
 			ExceptionFormatters = new List<ExceptionFormatter>();
@@ -31,7 +30,7 @@ namespace Logging.Formatters {
 		}
 
 		public static ExceptionFormatter GetFormatter(Exception e) {
-			return GetMultiFormatter(e) ?? GetConcreteFormatter(e);
+			return (GetMultiFormatter(e) ?? GetConcreteFormatter(e)) ?? new DefaultExceptionFormatter();
 		}
 
 		private static ExceptionFormatter GetMultiFormatter(Exception e) {

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace Logging.Formatters {
-	public abstract class ExceptionFormatter {
-
+	public abstract class ExceptionFormatter : IFormatter {
+		
 		internal virtual bool IsConcreteTypeFormatter => false;
 
 		internal virtual Type FormattingType => null;
@@ -13,12 +13,16 @@ namespace Logging.Formatters {
 
 		}
 
-		public abstract string Format(Exception e);
+		public abstract string Format(LogMessage e);
 
 		public abstract bool AllowFormat(Exception e);
+
+		protected static ExceptionFormatter GetExceptionFormatter(Exception e) {
+			return ExceptionFormattersManager.GetFormatter(e);
+		}
 	}
 
-	public abstract class ExceptionFormatter<T> : ExceptionFormatter {
+	public abstract class ExceptionFormatter<T> : ExceptionFormatter where T : Exception {
 
 		internal override bool IsConcreteTypeFormatter => true;
 

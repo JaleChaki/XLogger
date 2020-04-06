@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Logging.Formatters.FormatterConfiguration {
-	public class MessageFormatterConfig {
+﻿namespace Logging.Configuration.FormatterConfiguration {
+	public class MessageFormatterConfig : IAbstractConfiguration {
 
 		public string MessageFormat { get; set; }
 
 		public bool PrintExceptions { get; set; }
 
-		internal static MessageFormatterConfig GetDefaultConfiguration() {
+		public IAbstractConfiguration CreateDefaultConfiguration() {
 			return new MessageFormatterConfig {
-				MessageFormat = "",
+				MessageFormat = "{0:dd.MM.yyyy HH:mm:ss}: {1}:\t{2}",
 				PrintExceptions = true
 			};
 		}

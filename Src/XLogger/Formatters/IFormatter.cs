@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace Logging.Formatters {
-	public interface ILogFormatter {
+	public interface IFormatter {
 
-		string Format(LogMessage message);
+		string Format(LogMessage log);
 
 	}
 }
