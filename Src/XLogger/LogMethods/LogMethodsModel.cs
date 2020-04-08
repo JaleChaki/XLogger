@@ -11,5 +11,9 @@ namespace Logging.LogMethods {
 			Methods = new List<ILogMethod>();
 		}
 
+		public void AddMethod(ILogMethod method) {
+			Methods.Add(method);
+		}
+
 	}
 }

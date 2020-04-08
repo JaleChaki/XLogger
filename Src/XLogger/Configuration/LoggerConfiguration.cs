@@ -7,8 +7,12 @@ namespace Logging.Configuration {
 
 		internal static LoggerConfigurationModel LoggerConfigurationModel;
 
+		private static readonly object Sync = new object();
+
 		static LoggerConfiguration() {
-			new ConfigurationBuilder().ApplyConfiguration();
+			lock (Sync) {
+				new ConfigurationBuilder().ApplyConfiguration();
+			}
 		}
 
 		public static void ConfigureLoggerConfiguration(Action<ConfigurationBuilder> callback) {
@@ -21,11 +25,13 @@ namespace Logging.Configuration {
 			LoggerConfigurationModel.CurrentLogLevel = level;
 		}
 
-		public static void AddConfiguration<T>(T config) where T : IAbstractConfiguration {
-			LoggerConfigurationModel.AddConfiguration(config);
+		public static void AddConfiguration<T>(T config) where T : IConfiguration {
+			lock (Sync) {
+				LoggerConfigurationModel.AddConfiguration(config);
+			}
 		}
 
-		public static T GetConfiguration<T>() where T : IAbstractConfiguration {
+		public static T GetConfiguration<T>() where T : IConfiguration {
 			return LoggerConfigurationModel.GetConfiguration<T>();
 		}
 

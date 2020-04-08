@@ -12,14 +12,17 @@ namespace Logging.Configuration {
 
 		public LogLevel LogLevel { get; set; } = LogLevel.Info;
 
-		private LoggerConfigurationModel BuildedModel;
+		private LoggerConfigurationModel BuildedConfigModel;
+
+		private LogMethodsModel BuildedMethodsModel;
 
 		public ConfigurationBuilder() {
 			Reset();
 		}
 
 		public ConfigurationBuilder Reset() {
-			BuildedModel = new LoggerConfigurationModel();
+			BuildedConfigModel = new LoggerConfigurationModel();
+			BuildedMethodsModel = new LogMethodsModel();
 			return this;
 		}
 
@@ -29,43 +32,41 @@ namespace Logging.Configuration {
 		}
 
 #if USE_JSON
-		public ConfigurationBuilder FromJsonFile<T>(string filepath) where T : class, IAbstractConfiguration {
+		public ConfigurationBuilder FromJsonFile<T>(string filepath) where T : class, IConfiguration {
 			string jsonStr = File.ReadAllText(filepath);
-			BuildedModel.AddConfiguration<T>(JsonConvert.DeserializeObject<T>(jsonStr));
+			BuildedConfigModel.AddConfiguration<T>(JsonConvert.DeserializeObject<T>(jsonStr));
 			return this;
 		}
 #endif
 
-		public ConfigurationBuilder AddConfiguration<T>(IAbstractConfiguration config) where T : IAbstractConfiguration {
-			BuildedModel.AddConfiguration<T>((T)config);
+		public ConfigurationBuilder AddConfiguration<T>(T config) where T : IConfiguration {
+			BuildedConfigModel.AddConfiguration<T>(config);
 			return this;
 		}
 
 		public ConfigurationBuilder UseConsoleLogging() {
-			return UseConsoleLogging(true);
-		}
-
-		public ConfigurationBuilder UseConsoleLogging(bool use) {
+			BuildedMethodsModel.AddMethod(new ConsoleLogMethod());
 			return this;
 		}
+
 
 		public ConfigurationBuilder UseFileLogging() {
-			return UseFileLogging(true);
-		}
-
-		public ConfigurationBuilder UseFileLogging(bool use) {
+			BuildedMethodsModel.AddMethod(new FileLogMethod());
 			return this;
 		}
-
+		
 		public ConfigurationBuilder UseFileLogging(string fileName) {
+			BuildedMethodsModel.AddMethod(new FileLogMethod(fileName));
 			return this;
 		}
 
-		public ConfigurationBuilder UseCustomLogMethod<T>() where T : ILogMethod, new() {
+		public ConfigurationBuilder UseCustomLogMethod<T>() where T : class, ILogMethod, new() {
+			BuildedMethodsModel.AddMethod(new T());
 			return this;
 		}
 
 		public ConfigurationBuilder UseCustomLogMethod(ILogMethod method) {
+			BuildedMethodsModel.AddMethod(method);
 			return this;
 		}
 
@@ -77,7 +78,12 @@ namespace Logging.Configuration {
 		}
 
 		internal void ApplyConfiguration() {
-			LoggerConfiguration.LoggerConfigurationModel = BuildedModel;
+			lock (LoggerConfiguration.LoggerConfigurationModel) {
+				LoggerConfiguration.LoggerConfigurationModel = BuildedConfigModel;
+			}
+			lock (LogMethodsManager.LogMethodsModel) {
+				LogMethodsManager.LogMethodsModel = BuildedMethodsModel;
+			}
 		}
 
 	}

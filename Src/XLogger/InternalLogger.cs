@@ -10,7 +10,11 @@ namespace Logging {
 		public static IFormatter StringFormatter { get; set; }
 
 		public static void LogString(string log, LogLevel level) {
-
+			string formattedMessage = LogFormatterManager.GetFormatter(log).Format(new LogMessage(log, level));
+			FormattedLogMessage formattedResult = new FormattedLogMessage(formattedMessage, new LogMessage(log, level));
+			foreach (var m in LogMethodsManager.LogMethodsModel.Methods) {
+				m.Write(formattedResult);
+			}
 		}
 
 		public static void LogException(Exception e, LogLevel level) {

@@ -5,13 +5,13 @@ namespace Logging.Configuration {
 
 		public LogLevel CurrentLogLevel { get; set; }
 
-		private List<IAbstractConfiguration> Configurations;
+		private List<IConfiguration> Configurations;
 
 		public LoggerConfigurationModel() {
-			Configurations = new List<IAbstractConfiguration>();
+			Configurations = new List<IConfiguration>();
 		}
 
-		public void AddConfiguration<T>(T config) where T : IAbstractConfiguration {
+		public void AddConfiguration<T>(T config) where T : IConfiguration {
 			for (int i = 0; i < Configurations.Count; ++i) {
 				if (Configurations[i] is T) {
 					Configurations[i] = config;
@@ -19,7 +19,7 @@ namespace Logging.Configuration {
 			}
 		}
 
-		public T GetConfiguration<T>() where T : IAbstractConfiguration {
+		public T GetConfiguration<T>() where T : IConfiguration {
 			foreach (var item in Configurations) {
 				if (item is T castedItem) {
 					return castedItem;

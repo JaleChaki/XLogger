@@ -29,12 +29,6 @@ namespace Logging.Formatters {
 					.Append("\n")
 					.Append(e.StackTrace);
 			}
-			if (e.InnerException != null && Config.PrintInnerExceptions) {
-				result.Append(string.Format(Config.InnerExceptionHeader, e.InnerException.GetType().Name, e.InnerException.Message))
-					.Append("\n")
-					.Append(ExceptionFormatter.GetExceptionFormatter(e).Format(log));
-			}
-
 			return result.ToString();
 		}
 

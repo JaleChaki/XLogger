@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace Logging.Configuration.FormatterConfiguration {
-	public class ExceptionFormatterConfig : IAbstractConfiguration {
+	public class ExceptionFormatterConfig : IConfiguration {
 
 #if USE_JSON
 		[JsonProperty("HeaderFormat")]

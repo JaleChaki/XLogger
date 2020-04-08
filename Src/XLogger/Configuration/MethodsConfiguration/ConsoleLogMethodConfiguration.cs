@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 
 namespace Logging.Configuration.MethodsConfiguration {
-	public class ConsoleLogMethodConfiguration : IAbstractConfiguration {
+	public class ConsoleLogMethodConfiguration : IConfiguration {
 
 #if USE_JSON
 		[JsonProperty("Highlighting")]
@@ -22,7 +22,7 @@ namespace Logging.Configuration.MethodsConfiguration {
 			TextHighlighting = new Dictionary<LogLevel, ConsoleColor>();
 		}
 
-		public virtual IAbstractConfiguration CreateDefaultConfiguration() {
+		public virtual IConfiguration CreateDefaultConfiguration() {
 			var result = new ConsoleLogMethodConfiguration();
 			result.TextHighlighting = new Dictionary<LogLevel, ConsoleColor> {
 				{ LogLevel.Debug, ConsoleColor.DarkCyan },

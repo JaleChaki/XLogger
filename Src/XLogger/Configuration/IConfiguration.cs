@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace Logging.Configuration {
-	public interface IAbstractConfiguration {
+	public interface IConfiguration {
 
-		IAbstractConfiguration CreateDefaultConfiguration();
+		IConfiguration CreateDefaultConfiguration();
 
 	}
 }
