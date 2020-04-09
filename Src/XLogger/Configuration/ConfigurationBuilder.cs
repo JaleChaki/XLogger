@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using XLogger.Configuration.MethodsConfiguration;
+using XLogger.Formatters;
 
 namespace XLogger.Configuration {
 	public sealed class ConfigurationBuilder {
@@ -17,6 +18,8 @@ namespace XLogger.Configuration {
 
 		private LogMethodsModel BuildedMethodsModel;
 
+		private List<IFormatter> Formatters;
+
 		private static readonly object Sync = new object();
 
 		public ConfigurationBuilder() {
@@ -26,6 +29,7 @@ namespace XLogger.Configuration {
 		public ConfigurationBuilder Reset() {
 			BuildedConfigModel = new LoggerConfigurationModel();
 			BuildedMethodsModel = new LogMethodsModel();
+			Formatters = new List<IFormatter>();
 			return this;
 		}
 
@@ -48,27 +52,66 @@ namespace XLogger.Configuration {
 		}
 
 		public ConfigurationBuilder UseConsoleLogging() {
-			BuildedMethodsModel.AddMethod(new ConsoleLogMethod());
-			return this;
+			return UseConsoleLogging(filter: null);
 		}
 
+		public ConfigurationBuilder UseConsoleLogging(LogLevel higherLevel) {
+			return UseConsoleLogging(filter: LogLevelFilter.ByHigherLevel(higherLevel));
+		}
+
+		public ConfigurationBuilder UseConsoleLogging(Predicate<LogMessage> filterPredicate) {
+			return UseConsoleLogging(new PredicateFilter(filterPredicate));
+		}
+
+		public ConfigurationBuilder UseConsoleLogging(IFilter filter) {
+			BuildedMethodsModel.AddMethod(new ConsoleLogMethod(), filter);
+			return this;
+		}
 
 		public ConfigurationBuilder UseFileLogging() {
 			BuildedMethodsModel.AddMethod(new FileLogMethod());
 			return this;
 		}
-		
+
+		public ConfigurationBuilder UseFileLogging(Predicate<LogMessage> filterPredicate) {
+			BuildedMethodsModel.AddMethod(new FileLogMethod(), new PredicateFilter(filterPredicate));
+			return this;
+		}
+
+		public ConfigurationBuilder UseFileLogging(IFilter filter) {
+			BuildedMethodsModel.AddMethod(new FileLogMethod(), filter);
+			return this;
+		}
+
 		public ConfigurationBuilder UseFileLogging(string fileName) {
+			return UseFileLogging(fileName, filter: null);
+		}
+
+		public ConfigurationBuilder UseFileLogging(string fileName, IFilter filter) {
 			var config = new FileLogMethodConfiguration {
 				GenerateNewFile = false
 			};
 			BuildedConfigModel.AddConfiguration(config);
-			BuildedMethodsModel.AddMethod(new FileLogMethod(fileName, config));
+			BuildedMethodsModel.AddMethod(new FileLogMethod(fileName, config), filter);
 			return this;
+		}
+
+		public ConfigurationBuilder UseFileLogging(string fileName, Predicate<LogMessage> filterPredicate) {
+			return UseFileLogging(fileName, new PredicateFilter(filterPredicate));
 		}
 
 		public ConfigurationBuilder UseCustomLogMethod<T>() where T : class, ILogMethod, new() {
 			BuildedMethodsModel.AddMethod(new T());
+			return this;
+		}
+
+		public ConfigurationBuilder UseCustomLogMethod(ILogMethod method, Predicate<LogMessage> filterPredicate) {
+			BuildedMethodsModel.AddMethod(method, new PredicateFilter(filterPredicate));
+			return this;
+		}
+
+		public ConfigurationBuilder UseCustomLogMethod(ILogMethod method, IFilter filter) {
+			BuildedMethodsModel.AddMethod(method, filter);
 			return this;
 		}
 
@@ -83,10 +126,23 @@ namespace XLogger.Configuration {
 				.UseConsoleLogging();
 		}
 
+		public ConfigurationBuilder AddFormatter(IFormatter formatter) {
+			Formatters.Add(formatter);
+			return this;
+		}
+
 		internal void ApplyConfiguration() {
 			lock (Sync) {
 				LoggerConfiguration.LoggerConfigurationModel = BuildedConfigModel;
 				LogMethodsManager.LogMethodsModel = BuildedMethodsModel;
+				ExceptionFormattersManager.Reset();
+				foreach (IFormatter f in Formatters) {
+					if (f is ExceptionFormatter ef) {
+						ExceptionFormattersManager.AddFormatter(ef);
+					} else {
+						LogFormatterManager.AddFormatter(f);
+					}
+				}
 			}
 		}
 

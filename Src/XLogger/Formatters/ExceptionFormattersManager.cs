@@ -6,24 +6,26 @@ using System.Text;
 namespace XLogger.Formatters {
 	internal static class ExceptionFormattersManager {
 
-		public static ICollection<ExceptionFormatter> ExceptionFormatters;
+		private static ICollection<ExceptionFormatter> ExceptionFormatters;
 
-		public static IDictionary<Type, ExceptionFormatter> ConcreteExceptionFormatters;
+		private static IDictionary<Type, ExceptionFormatter> ConcreteExceptionFormatters;
 
 		static ExceptionFormattersManager() {
+			Reset();
+		}
+
+		internal static void Reset() {
 			ConcreteExceptionFormatters = new Dictionary<Type, ExceptionFormatter>();
 			ExceptionFormatters = new List<ExceptionFormatter>();
 		}
 
 		public static void AddFormatter(ExceptionFormatter formatter) {
-			if (formatter.IsConcreteTypeFormatter) {
-				
+			if (formatter.IsConcreteTypeFormatter) {				
 				if (ConcreteExceptionFormatters.ContainsKey(formatter.FormattingType)) {
 					ConcreteExceptionFormatters[formatter.FormattingType] = formatter;
 				} else {
 					ConcreteExceptionFormatters.Add(formatter.FormattingType, formatter);
 				}
-
 			} else {
 				ExceptionFormatters.Add(formatter);
 			}

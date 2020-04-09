@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using XLogger.Formatters;
+using XLogger.LogMethods;
 
 namespace XLogger.Configuration {
 	public static class LoggerConfiguration {
@@ -36,6 +38,26 @@ namespace XLogger.Configuration {
 			lock (Sync) {
 				return LoggerConfigurationModel.GetConfiguration<T>();
 			}
+		}
+
+		public static void AddFormatter(IFormatter formatter) {
+			if (formatter is ExceptionFormatter excFormatter) {
+				ExceptionFormattersManager.AddFormatter(excFormatter);
+			} else {
+				LogFormatterManager.AddFormatter(formatter);
+			}
+		}
+
+		public static void AddLogMethod(ILogMethod method, IFilter filter) {
+
+		}
+
+		public static void AddLogMethod(ILogMethod method, Predicate<LogMessage> predicate) {
+
+		}
+
+		public static void AddLogMethod(ILogMethod method) {
+
 		}
 
 	}

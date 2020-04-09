@@ -27,7 +27,7 @@ namespace XLogger.Configuration.MethodsConfiguration {
 			result.TextHighlighting = new Dictionary<LogLevel, ConsoleColor> {
 				{ LogLevel.Debug, ConsoleColor.DarkCyan },
 				{ LogLevel.Info, ConsoleColor.DarkGreen },
-				{ LogLevel.Warning, ConsoleColor.Yellow },
+				{ LogLevel.Warn, ConsoleColor.Yellow },
 				{ LogLevel.Error, ConsoleColor.Red },
 				{ LogLevel.Fatal, ConsoleColor.Red }
 			};

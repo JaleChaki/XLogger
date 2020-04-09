@@ -15,8 +15,10 @@ namespace XLogger.Configuration {
 			for (int i = 0; i < Configurations.Count; ++i) {
 				if (Configurations[i] is T) {
 					Configurations[i] = config;
+					return;
 				}
 			}
+			Configurations.Add(config);
 		}
 
 		public T GetConfiguration<T>() where T : IConfiguration {

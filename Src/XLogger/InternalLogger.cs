@@ -13,8 +13,8 @@ namespace XLogger {
 			var loggedMessage = new LogMessage(log, level);
 			string formattedMessage = LogFormatterManager.GetFormatter(log).Format(loggedMessage);
 			FormattedLogMessage formattedResult = new FormattedLogMessage(formattedMessage, loggedMessage);
-			foreach (var m in LogMethodsManager.LogMethodsModel.Methods) {
-				m.Write(formattedResult);
+			foreach (var i in LogMethodsManager.LogMethodsModel.Instances) {
+				i.WriteIfPossible(formattedResult);
 			}
 		}
 
@@ -22,8 +22,8 @@ namespace XLogger {
 			var loggedMessage = new LogMessage(e, level);
 			string formattedMessage = ExceptionFormattersManager.GetFormatter(e)?.Format(loggedMessage);
 			FormattedLogMessage formattedResult = new FormattedLogMessage(formattedMessage, loggedMessage);
-			foreach (var m in LogMethodsManager.LogMethodsModel.Methods) {
-				m.Write(formattedResult);
+			foreach (var i in LogMethodsManager.LogMethodsModel.Instances) {
+				i.WriteIfPossible(formattedResult);
 			}
 		}
 

@@ -12,7 +12,7 @@ namespace XLogger {
 		}
 
 		public static void Warn(string log) {
-			InternalLogger.LogString(log, LogLevel.Warning);
+			InternalLogger.LogString(log, LogLevel.Warn);
 		}
 
 		public static void Error(string log) {
@@ -32,7 +32,7 @@ namespace XLogger {
 		}
 
 		public static void Warn(Exception e) {
-			InternalLogger.LogException(e, LogLevel.Warning);
+			InternalLogger.LogException(e, LogLevel.Warn);
 		}
 
 		public static void Error(Exception e) {
