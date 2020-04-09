@@ -10,15 +10,21 @@ namespace XLogger {
 		public static IFormatter StringFormatter { get; set; }
 
 		public static void LogString(string log, LogLevel level) {
-			string formattedMessage = LogFormatterManager.GetFormatter(log).Format(new LogMessage(log, level));
-			FormattedLogMessage formattedResult = new FormattedLogMessage(formattedMessage, new LogMessage(log, level));
+			var loggedMessage = new LogMessage(log, level);
+			string formattedMessage = LogFormatterManager.GetFormatter(log).Format(loggedMessage);
+			FormattedLogMessage formattedResult = new FormattedLogMessage(formattedMessage, loggedMessage);
 			foreach (var m in LogMethodsManager.LogMethodsModel.Methods) {
 				m.Write(formattedResult);
 			}
 		}
 
 		public static void LogException(Exception e, LogLevel level) {
-
+			var loggedMessage = new LogMessage(e, level);
+			string formattedMessage = ExceptionFormattersManager.GetFormatter(e)?.Format(loggedMessage);
+			FormattedLogMessage formattedResult = new FormattedLogMessage(formattedMessage, loggedMessage);
+			foreach (var m in LogMethodsManager.LogMethodsModel.Methods) {
+				m.Write(formattedResult);
+			}
 		}
 
 		public static void LogObject(object obj, LogLevel level) {

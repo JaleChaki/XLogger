@@ -17,15 +17,19 @@ namespace XLogger.LogMethods {
 		protected List<string> WaitedLogs;
 
 		public FileLogMethod(string fileName = null, FileLogMethodConfiguration config = null) {
-			config = config ?? LoggerConfiguration.GetConfiguration<FileLogMethodConfiguration>();
+			config = config ?? LoggerConfiguration.GetConfiguration<FileLogMethodConfiguration>() ?? (new FileLogMethodConfiguration()).CreateDefaultConfiguration() as FileLogMethodConfiguration;
 			fileName = fileName ?? "log.log";
 			if (config.GenerateNewFile) {
 				FileName = string.Format(config.FilePattern, DateTime.Now, fileName);
 			} else {
-				FileName = config.FilePattern;
+				FileName = fileName;
 			}
-			FileDirectory = config.FileDirectory;
+			FileDirectory = config.FileDirectory ?? string.Empty;
 			WaitedLogs = new List<string>();
+		}
+
+		public FileLogMethod(FileLogMethodConfiguration config) : this(config?.FilePattern, config) {
+
 		}
 
 		public FileLogMethod(string fileName) : this(fileName, LoggerConfiguration.GetConfiguration<FileLogMethodConfiguration>()) {
@@ -41,9 +45,11 @@ namespace XLogger.LogMethods {
 		public void Write(FormattedLogMessage log) {
 			lock (Sync) {
 				try {
-					DirectoryInfo dir = new DirectoryInfo(FileDirectory);
-					if (!dir.Exists) {
-						dir.Create();
+					if (!string.IsNullOrEmpty(FileDirectory)) {
+						DirectoryInfo dir = new DirectoryInfo(FileDirectory);
+						if (!dir.Exists) {
+							dir.Create();
+						}
 					}
 					using (var writer = new StreamWriter(File.Open(Path.Combine(FileDirectory, FileName), FileMode.Append))) {
 						writer.WriteLine(log.FormattedMessage);

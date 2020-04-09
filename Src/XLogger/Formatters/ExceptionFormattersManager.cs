@@ -42,7 +42,7 @@ namespace XLogger.Formatters {
 			return null;
 		}
 
-		public static ExceptionFormatter GetConcreteFormatter(Exception e) {
+		private static ExceptionFormatter GetConcreteFormatter(Exception e) {
 			if (ConcreteExceptionFormatters.ContainsKey(e.GetType())) {
 				return ConcreteExceptionFormatters[e.GetType()];
 			}
@@ -59,7 +59,11 @@ namespace XLogger.Formatters {
 				return a.FormattingType.IsSubclassOf(b.FormattingType) ? -1 : 1;
 			});
 
-			return allowFormatters.First();
+			if (allowFormatters.Count() > 0) {
+				return allowFormatters.First();
+			} else {
+				return null;
+			}
 		}
 
 	}

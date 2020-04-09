@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using XLogger.Configuration.MethodsConfiguration;
 
 namespace XLogger.Configuration {
 	public sealed class ConfigurationBuilder {
@@ -58,7 +59,11 @@ namespace XLogger.Configuration {
 		}
 		
 		public ConfigurationBuilder UseFileLogging(string fileName) {
-			BuildedMethodsModel.AddMethod(new FileLogMethod(fileName));
+			var config = new FileLogMethodConfiguration {
+				GenerateNewFile = false
+			};
+			BuildedConfigModel.AddConfiguration(config);
+			BuildedMethodsModel.AddMethod(new FileLogMethod(fileName, config));
 			return this;
 		}
 

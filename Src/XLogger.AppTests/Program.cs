@@ -10,6 +10,8 @@ namespace XLogger.AppTests {
 			Logger.Warn("warn log");
 			Logger.Fatal("fatal log");
 			Console.WriteLine("primary color log");
+
+			Logger.Error(new Exception("exception message"));
 		}
 	}
 }

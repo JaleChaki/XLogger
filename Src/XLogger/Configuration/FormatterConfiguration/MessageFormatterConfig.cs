@@ -7,7 +7,7 @@
 
 		public IConfiguration CreateDefaultConfiguration() {
 			return new MessageFormatterConfig {
-				MessageFormat = "{0:dd.MM.yyyy HH:mm:ss}: {1}:\t{2}",
+				MessageFormat = "{0:dd.MM.yyyy HH:mm:ss} {1}:\t{2}",
 				PrintExceptions = true
 			};
 		}
