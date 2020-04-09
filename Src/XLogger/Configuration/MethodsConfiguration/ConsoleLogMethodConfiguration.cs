@@ -5,7 +5,7 @@ using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 
-namespace Logging.Configuration.MethodsConfiguration {
+namespace XLogger.Configuration.MethodsConfiguration {
 	public class ConsoleLogMethodConfiguration : IConfiguration {
 
 #if USE_JSON

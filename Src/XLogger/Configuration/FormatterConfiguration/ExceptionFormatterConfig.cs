@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Logging.Configuration.FormatterConfiguration {
+namespace XLogger.Configuration.FormatterConfiguration {
 	public class ExceptionFormatterConfig : IConfiguration {
 
 #if USE_JSON
@@ -27,7 +27,7 @@ namespace Logging.Configuration.FormatterConfiguration {
 
 		public bool PrintInnerExceptions { get; set; }
 
-		internal static ExceptionFormatterConfig GetDefaultConfiguration() {
+		public IConfiguration CreateDefaultConfiguration() {
 			return new ExceptionFormatterConfig {
 				ExceptionHeaderFormat = "{0}: {1}",
 				ExceptionStackTraceHeader = "StackTrace:",
@@ -35,8 +35,5 @@ namespace Logging.Configuration.FormatterConfiguration {
 				PrintInnerExceptions = true
 			};
 		}
-
-
-
 	}
 }

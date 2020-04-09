@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Logging.Formatters {
+namespace XLogger.Formatters {
 	internal static class ExceptionFormattersManager {
 
 		public static ICollection<ExceptionFormatter> ExceptionFormatters;

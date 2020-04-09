@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Logging.Configuration {
+namespace XLogger.Configuration {
 	public static class LoggerConfiguration {
 
 		internal static LoggerConfigurationModel LoggerConfigurationModel;
@@ -11,7 +11,8 @@ namespace Logging.Configuration {
 
 		static LoggerConfiguration() {
 			lock (Sync) {
-				new ConfigurationBuilder().ApplyConfiguration();
+				LoggerConfigurationModel = new LoggerConfigurationModel();
+				new ConfigurationBuilder().UseDefaultConfiguration().ApplyConfiguration();
 			}
 		}
 
@@ -32,7 +33,9 @@ namespace Logging.Configuration {
 		}
 
 		public static T GetConfiguration<T>() where T : IConfiguration {
-			return LoggerConfigurationModel.GetConfiguration<T>();
+			lock (Sync) {
+				return LoggerConfigurationModel.GetConfiguration<T>();
+			}
 		}
 
 	}

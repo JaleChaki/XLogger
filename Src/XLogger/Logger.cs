@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Logging {
+namespace XLogger {
 	public static class Logger {
 
 		public static void Debug(string log) {

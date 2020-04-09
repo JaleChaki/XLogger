@@ -1,14 +1,14 @@
-﻿using Logging.Configuration.FormatterConfiguration;
+﻿using XLogger.Configuration.FormatterConfiguration;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Logging.Formatters {
+namespace XLogger.Formatters {
 	public class DefaultExceptionFormatter : ExceptionFormatter<Exception> {
 
 		public ExceptionFormatterConfig Config { get; set; }
 
-		public DefaultExceptionFormatter() : this(ExceptionFormatterConfig.GetDefaultConfiguration()) {
+		public DefaultExceptionFormatter() : this((new ExceptionFormatterConfig()).CreateDefaultConfiguration() as ExceptionFormatterConfig) {
 			
 		}
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Runtime.Serialization;
 
-namespace Logging {
+namespace XLogger {
 	public enum LogLevel {
 
 		[EnumMember(Value = "Debug")]

@@ -1,5 +1,5 @@
 ﻿#if USE_JSON
-using Logging.LogMethods;
+using XLogger.LogMethods;
 using Newtonsoft.Json;
 #endif
 using System;
@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace Logging.Configuration {
+namespace XLogger.Configuration {
 	public sealed class ConfigurationBuilder {
 
 		public LogLevel LogLevel { get; set; } = LogLevel.Info;
@@ -15,6 +15,8 @@ namespace Logging.Configuration {
 		private LoggerConfigurationModel BuildedConfigModel;
 
 		private LogMethodsModel BuildedMethodsModel;
+
+		private static readonly object Sync = new object();
 
 		public ConfigurationBuilder() {
 			Reset();
@@ -73,15 +75,12 @@ namespace Logging.Configuration {
 		public ConfigurationBuilder UseDefaultConfiguration() {
 			return Reset()
 				.UseLogLevel(LogLevel.Info)
-				.UseFileLogging()
 				.UseConsoleLogging();
 		}
 
 		internal void ApplyConfiguration() {
-			lock (LoggerConfiguration.LoggerConfigurationModel) {
+			lock (Sync) {
 				LoggerConfiguration.LoggerConfigurationModel = BuildedConfigModel;
-			}
-			lock (LogMethodsManager.LogMethodsModel) {
 				LogMethodsManager.LogMethodsModel = BuildedMethodsModel;
 			}
 		}

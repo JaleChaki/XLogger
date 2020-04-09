@@ -1,11 +1,11 @@
-﻿using Logging.Configuration;
-using Logging.Configuration.MethodsConfiguration;
+﻿using XLogger.Configuration;
+using XLogger.Configuration.MethodsConfiguration;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace Logging.LogMethods {
+namespace XLogger.LogMethods {
 	public class FileLogMethod : ILogMethod {
 
 		public readonly string FileName;

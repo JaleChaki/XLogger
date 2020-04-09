@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Logging.Configuration {
+namespace XLogger.Configuration {
 	internal class LoggerConfigurationModel {
 
 		public LogLevel CurrentLogLevel { get; set; }

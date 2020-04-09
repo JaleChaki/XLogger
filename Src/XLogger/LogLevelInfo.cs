@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Logging {
+namespace XLogger {
 	public class LogLevelInfo {
 
 		public LogLevel Level { get; }

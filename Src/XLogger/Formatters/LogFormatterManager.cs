@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Logging.Formatters {
+namespace XLogger.Formatters {
 	internal static class LogFormatterManager {
 
 		public static IFormatter GetFormatter(string loggedMessage) {

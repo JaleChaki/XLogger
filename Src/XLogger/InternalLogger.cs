@@ -1,10 +1,10 @@
-﻿using Logging.Formatters;
-using Logging.LogMethods;
+﻿using XLogger.Formatters;
+using XLogger.LogMethods;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Logging {
+namespace XLogger {
 	internal static class InternalLogger {
 
 		public static IFormatter StringFormatter { get; set; }

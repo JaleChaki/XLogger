@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Logging.LogMethods {
+namespace XLogger.LogMethods {
 	public interface ILogMethod {
 
 		void Write(FormattedLogMessage log);

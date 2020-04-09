@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Logging.Formatters {
+namespace XLogger.Formatters {
 	public abstract class ExceptionFormatter : IFormatter {
 		
 		internal virtual bool IsConcreteTypeFormatter => false;

@@ -1,4 +1,4 @@
-﻿namespace Logging.Configuration.FormatterConfiguration {
+﻿namespace XLogger.Configuration.FormatterConfiguration {
 	public class MessageFormatterConfig : IConfiguration {
 
 		public string MessageFormat { get; set; }

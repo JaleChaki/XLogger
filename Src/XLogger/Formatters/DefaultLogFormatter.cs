@@ -1,10 +1,10 @@
-﻿using Logging.Configuration;
-using Logging.Configuration.FormatterConfiguration;
+﻿using XLogger.Configuration;
+using XLogger.Configuration.FormatterConfiguration;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Logging.Formatters {
+namespace XLogger.Formatters {
 	public class DefaultLogFormatter : IFormatter {
 
 		public MessageFormatterConfig Config { get; set; }
@@ -14,7 +14,7 @@ namespace Logging.Formatters {
 		}
 
 		public DefaultLogFormatter(MessageFormatterConfig config) {
-			Config = config;
+			Config = config ?? (new MessageFormatterConfig()).CreateDefaultConfiguration() as MessageFormatterConfig;
 		}
 
 		public virtual string Format(LogMessage message) {

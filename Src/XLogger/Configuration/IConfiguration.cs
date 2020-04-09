@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Logging.Configuration {
+namespace XLogger.Configuration {
 	public interface IConfiguration {
 
 		IConfiguration CreateDefaultConfiguration();

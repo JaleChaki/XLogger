@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Logging.LogMethods {
+namespace XLogger.LogMethods {
 	internal class LogMethodsModel {
 
 		public List<ILogMethod> Methods { get; set; }
