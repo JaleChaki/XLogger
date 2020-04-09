@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.29123.88
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XLogger", "XLogger\XLogger.csproj", "{587CAF2B-A2C9-4F4B-8AB3-96FC792EA37F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XLogger.Tests", "XLogger.Tests\XLogger.Tests.csproj", "{7B9D9D99-EEC5-43C5-B35D-E474F2F81A0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XLogger.AppTests", "XLogger.AppTests\XLogger.AppTests.csproj", "{531438A4-D76B-483B-812F-2684D795A125}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{587CAF2B-A2C9-4F4B-8AB3-96FC792EA37F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{587CAF2B-A2C9-4F4B-8AB3-96FC792EA37F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{587CAF2B-A2C9-4F4B-8AB3-96FC792EA37F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B9D9D99-EEC5-43C5-B35D-E474F2F81A0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B9D9D99-EEC5-43C5-B35D-E474F2F81A0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B9D9D99-EEC5-43C5-B35D-E474F2F81A0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B9D9D99-EEC5-43C5-B35D-E474F2F81A0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{531438A4-D76B-483B-812F-2684D795A125}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{531438A4-D76B-483B-812F-2684D795A125}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{531438A4-D76B-483B-812F-2684D795A125}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{531438A4-D76B-483B-812F-2684D795A125}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
