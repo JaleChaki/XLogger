@@ -9,35 +9,34 @@ namespace XLogger {
 
 		public static IFormatter StringFormatter { get; set; }
 
+		public readonly static object Sync = new object();
+
 		public static void LogString(string log, LogLevel level) {
-			var loggedMessage = new LogMessage(log, level);
-			string formattedMessage = LogFormatterManager.GetFormatter(log).Format(loggedMessage);
-			FormattedLogMessage formattedResult = new FormattedLogMessage(formattedMessage, loggedMessage);
-			foreach (var i in LogMethodsManager.LogMethodsModel.Instances) {
-				i.WriteIfPossible(formattedResult);
+			lock (Sync) {
+				var loggedMessage = new LogMessage(log, level);
+				string formattedMessage = LogFormatterManager.GetFormatter(log).Format(loggedMessage);
+				FormattedLogMessage formattedResult = new FormattedLogMessage(formattedMessage, loggedMessage);
+				foreach (var i in LogMethodsManager.LogMethodsModel.Instances) {
+					i.WriteIfPossible(formattedResult);
+				}
 			}
 		}
 
 		public static void LogException(Exception e, LogLevel level) {
-			var loggedMessage = new LogMessage(e, level);
-			string formattedMessage = ExceptionFormattersManager.GetFormatter(e)?.Format(loggedMessage);
-			FormattedLogMessage formattedResult = new FormattedLogMessage(formattedMessage, loggedMessage);
-			foreach (var i in LogMethodsManager.LogMethodsModel.Instances) {
-				i.WriteIfPossible(formattedResult);
+			string formattedMessage;
+			lock (Sync) {
+				var loggedMessage = new LogMessage(e, level);
+				formattedMessage = ExceptionFormattersManager.GetFormatter(e)?.Format(loggedMessage);
 			}
+			LogString(formattedMessage, level);
 		}
 
 		public static void LogObject(object obj, LogLevel level) {
-			if (obj is Exception e) {
-				LogException(e, level);
-				return;
-			}
-
-		}
-
-		private static void InvokeMethods(FormattedLogMessage formattedLog, IEnumerable<ILogMethod> methods) {
-			foreach (var m in methods) {
-				m.Write(formattedLog);
+			lock (Sync) {
+				if (obj is Exception e) {
+					LogException(e, level);
+					return;
+				}
 			}
 		}
 

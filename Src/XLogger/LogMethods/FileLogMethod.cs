@@ -12,8 +12,6 @@ namespace XLogger.LogMethods {
 
 		public readonly string FileDirectory;
 
-		protected static readonly object Sync = new object();
-
 		protected List<string> WaitedLogs;
 
 		public FileLogMethod(string fileName = null, FileLogMethodConfiguration config = null) {
@@ -43,21 +41,23 @@ namespace XLogger.LogMethods {
 		}
 
 		public void Write(FormattedLogMessage log) {
-			lock (Sync) {
-				try {
-					if (!string.IsNullOrEmpty(FileDirectory)) {
-						DirectoryInfo dir = new DirectoryInfo(FileDirectory);
-						if (!dir.Exists) {
-							dir.Create();
-						}
-					}
-					using (var writer = new StreamWriter(File.Open(Path.Combine(FileDirectory, FileName), FileMode.Append))) {
-						writer.WriteLine(log.FormattedMessage);
+			try {
+				if (!string.IsNullOrEmpty(FileDirectory)) {
+					DirectoryInfo dir = new DirectoryInfo(FileDirectory);
+					if (!dir.Exists) {
+						dir.Create();
 					}
 				}
-				catch {
-					WaitedLogs.Add(log.FormattedMessage);
+				using (var writer = new StreamWriter(File.Open(Path.Combine(FileDirectory, FileName), FileMode.Append))) {
+					foreach (string s in WaitedLogs) {
+						writer.WriteLine(s);
+					}
+					WaitedLogs.Clear();
+					writer.WriteLine(log.FormattedMessage);
 				}
+			}
+			catch {
+				WaitedLogs.Add(log.FormattedMessage);
 			}
 		}
 	}

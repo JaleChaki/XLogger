@@ -29,12 +29,10 @@ namespace XLogger.LogMethods {
 		}
 
 		public void Write(FormattedLogMessage formattedLog) {
-			lock (Sync) {
-				ConsoleColor previousConsoleColor = Console.ForegroundColor;
-				Console.ForegroundColor = GetTextHightlighting(formattedLog);
-				Console.WriteLine(formattedLog.FormattedMessage);
-				Console.ForegroundColor = previousConsoleColor;
-			}
+			ConsoleColor previousConsoleColor = Console.ForegroundColor;
+			Console.ForegroundColor = GetTextHightlighting(formattedLog);
+			Console.WriteLine(formattedLog.FormattedMessage);
+			Console.ForegroundColor = previousConsoleColor;
 		}
 	}
 }

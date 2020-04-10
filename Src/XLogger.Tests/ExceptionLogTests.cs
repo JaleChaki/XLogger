@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,12 +13,19 @@ namespace XLogger.Tests {
 	public class ExceptionLogTests {
 
 		private class CustomExceptionFormatter : ExceptionFormatter<Exception> {
+
+			public const string FormattedString = "CustomExceptionLog";
+			
 			public override string Format(LogMessage e) {
-				return "qwe";
+				return FormattedString;
 			}
 		}
 
 		private class CustomException : Exception {
+
+			public CustomException(string message) : base(message) {
+
+			}
 
 		}
 
@@ -29,9 +37,15 @@ namespace XLogger.Tests {
 		[TestMethod]
 		public void CustomExceptionFormatterTest() {
 			LoggerConfiguration.ConfigureLoggerConfiguration(builder => {
-				builder.AddFormatter(new CustomExceptionFormatter());
+				builder
+					.AddFormatter(new CustomExceptionFormatter())
+					.UseFileLogging("log.txt");
 			});
-			Logger.Info(new CustomException());
+			string CustomExceptionMessage = TestUtils.GenerateString();
+			Logger.Info(new CustomException(CustomExceptionMessage));
+			string line = File.ReadAllText("log.txt");
+			Assert.IsTrue(line.Contains(CustomExceptionFormatter.FormattedString));
+			Assert.IsFalse(line.Contains(CustomExceptionMessage));
 		}
 
 	}

@@ -5,11 +5,7 @@ using System.Text;
 namespace XLogger {
 	public class LogLevelFilter : IFilter {
 
-		private Predicate<LogMessage> Predicate;
-
-		public LogLevelFilter(Predicate<LogMessage> predicate) {
-			Predicate = predicate;
-		}
+		private readonly Predicate<LogMessage> Predicate;
 
 		public LogLevelFilter(LogLevel exactlyLevel) : this(exactlyLevel: exactlyLevel, null, null) {
 

@@ -8,7 +8,7 @@ namespace XLogger.AppTests {
 
 		private class CustomExceptionFormatter : ExceptionFormatter<CustomException> {
 			public override string Format(LogMessage e) {
-				return "qwe";
+				return "custom exception message";
 			}
 		}
 
@@ -17,7 +17,7 @@ namespace XLogger.AppTests {
 		}
 
 		static void Main(string[] args) {
-			Logger.Info("test log");
+			Logger.Info("info log");
 			Logger.Debug("debug log");
 			Logger.Error("error log");
 			Logger.Warn("warn log");

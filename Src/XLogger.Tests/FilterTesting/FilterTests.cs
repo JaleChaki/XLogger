@@ -48,6 +48,9 @@ namespace XLogger.Tests.FilterTesting {
 			PredicateFilter filter = new PredicateFilter(x => x.Message.Contains("abc"));
 			Assert.IsTrue(filter.Filter(new LogMessage("adeabcde", LogLevel.Debug)));
 			Assert.IsFalse(filter.Filter(new LogMessage("adeabbcde", LogLevel.Debug)));
+			filter = new PredicateFilter(x => x.Exception != null);
+			Assert.IsTrue(filter.Filter(new LogMessage(new Exception(), LogLevel.Debug)));
+			Assert.IsFalse(filter.Filter(new LogMessage("exception", LogLevel.Debug)));
 		}
 
 	}
