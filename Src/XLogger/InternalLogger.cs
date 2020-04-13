@@ -17,7 +17,7 @@ namespace XLogger {
 				string formattedMessage = LogFormatterManager.GetFormatter(log).Format(loggedMessage);
 				FormattedLogMessage formattedResult = new FormattedLogMessage(formattedMessage, loggedMessage);
 				foreach (var i in LogMethodsManager.LogMethodsModel.Instances) {
-					i.WriteIfPossible(formattedResult);
+					i.WriteIfNeed(formattedResult);
 				}
 			}
 		}

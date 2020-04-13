@@ -14,7 +14,7 @@ namespace XLogger.LogMethods {
 			this.Filter = filter;
 		}
 
-		public void WriteIfPossible(FormattedLogMessage formattedLog) {
+		public void WriteIfNeed(FormattedLogMessage formattedLog) {
 			if (Filter == null || Filter.Filter(formattedLog.PrimaryMessage)) {
 				Method.Write(formattedLog);
 			}
