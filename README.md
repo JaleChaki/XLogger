@@ -3,7 +3,7 @@ Simple logger for C# apps
 
 ## Features
 1. Console text highlighting:
-![img](Doc\Readme\feature1.png)
+![](/Doc/Readme/feature1.png)
 
 2. Levels filtering
 ```c#
