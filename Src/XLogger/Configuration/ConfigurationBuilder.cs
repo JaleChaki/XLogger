@@ -30,6 +30,7 @@ namespace XLogger.Configuration {
 			BuildedConfigModel = new LoggerConfigurationModel();
 			BuildedMethodsModel = new LogMethodsModel();
 			Formatters = new List<IFormatter>();
+			LogLevel = LogLevel.Info;
 			return this;
 		}
 
@@ -133,6 +134,7 @@ namespace XLogger.Configuration {
 
 		internal void ApplyConfiguration() {
 			lock (Sync) {
+				BuildedConfigModel.CurrentLogLevel = LogLevel;
 				LoggerConfiguration.LoggerConfigurationModel = BuildedConfigModel;
 				LogMethodsManager.LogMethodsModel = BuildedMethodsModel;
 				ExceptionFormattersManager.Reset();
