@@ -36,16 +36,17 @@ namespace XLogger.Tests {
 
 		[TestMethod]
 		public void CustomExceptionFormatterTest() {
+			TestUtils.ClearSpace();
 			LoggerConfiguration.ConfigureLoggerConfiguration(builder => {
 				builder
 					.AddFormatter(new CustomExceptionFormatter())
-					.UseFileLogging("log.txt");
+					.UseFileLogging("log.log");
 			});
 			string CustomExceptionMessage = TestUtils.GenerateString();
 			Logger.Info(new CustomException(CustomExceptionMessage));
-			string line = File.ReadAllText("log.txt");
-			Assert.IsTrue(line.Contains(CustomExceptionFormatter.FormattedString));
-			Assert.IsFalse(line.Contains(CustomExceptionMessage));
+			string line = File.ReadAllText("log.log");
+			Assert.IsTrue(TestUtils.FileContainsString(CustomExceptionFormatter.FormattedString));
+			Assert.IsFalse(TestUtils.FileContainsString(CustomExceptionMessage));
 		}
 
 	}

@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace XLogger.Tests {
 	internal static class TestUtils {
@@ -11,10 +9,20 @@ namespace XLogger.Tests {
 
 		public static string GenerateString(int stringLength = 64) {
 			StringBuilder result = new StringBuilder();
-			for (int i = 0; i < 64; ++i) {
+			for (int i = 0; i < stringLength; ++i) {
 				result.Append((char)Random.Next(256));
 			}
 			return result.ToString();
+		}
+
+		public static void ClearSpace() {
+			if (File.Exists("log.log")) {
+				File.Delete("log.log");
+			}
+		}
+
+		public static bool FileContainsString(string searchStr, string filename = "log.log") {
+			return File.ReadAllText(filename).Contains(searchStr);
 		}
 
 	}

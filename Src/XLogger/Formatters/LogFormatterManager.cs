@@ -5,12 +5,14 @@ using System.Text;
 namespace XLogger.Formatters {
 	internal static class LogFormatterManager {
 
-		public static void AddFormatter(IFormatter formatter) {
+		private static IFormatter Formatter { get; set; }
 
+		public static void SetFormatter(IFormatter formatter) {
+			Formatter = formatter;
 		}
 
-		public static IFormatter GetFormatter(string loggedMessage) {
-			return new DefaultLogFormatter();
+		public static IFormatter GetFormatter() {
+			return Formatter ?? new DefaultLogFormatter();
 		}
 
 	}

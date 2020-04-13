@@ -136,11 +136,12 @@ namespace XLogger.Configuration {
 				LoggerConfiguration.LoggerConfigurationModel = BuildedConfigModel;
 				LogMethodsManager.LogMethodsModel = BuildedMethodsModel;
 				ExceptionFormattersManager.Reset();
+				LogFormatterManager.SetFormatter(null);
 				foreach (IFormatter f in Formatters) {
 					if (f is ExceptionFormatter ef) {
 						ExceptionFormattersManager.AddFormatter(ef);
 					} else {
-						LogFormatterManager.AddFormatter(f);
+						LogFormatterManager.SetFormatter(f);
 					}
 				}
 			}

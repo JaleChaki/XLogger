@@ -55,6 +55,7 @@
     <Compile Include="LoggerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestUtils.cs" />
+    <Compile Include="CustomLogFormatterTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

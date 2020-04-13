@@ -14,28 +14,27 @@ namespace XLogger.Tests.FilterTesting {
 
 		[TestMethod]
 		public void SingleFilterTest() {
-			if (File.Exists("log.txt")) {
-				File.Delete("log.txt");
-			}
+			TestUtils.ClearSpace();
+			string validStringMask = "123";
+			string validString = "123123123";
+			string wrongString = "__1243__";
 			LoggerConfiguration.ConfigureLoggerConfiguration(builder => {
 				builder
-					.UseFileLogging("log.txt", x => x.Message.Contains("123"));
+					.UseFileLogging("log.log", x => x.Message.Contains(validStringMask));
 			});
-			Logger.Debug("123123123");
-			Logger.Debug("__1243__");
-			string lines = File.ReadAllText("log.txt");
-			Assert.IsTrue(lines.Contains("123123123"));
-			Assert.IsFalse(lines.Contains("__1243__"));
-			File.Delete("log.txt");
+			Logger.Debug(validString);
+			Logger.Debug(wrongString);
+			Assert.IsTrue(TestUtils.FileContainsString(validString));
+			Assert.IsFalse(TestUtils.FileContainsString(wrongString));
+			TestUtils.ClearSpace();
 			LoggerConfiguration.ConfigureLoggerConfiguration(builder => {
 				builder
-					.UseFileLogging("log.txt");
+					.UseFileLogging("log.log");
 			});
-			Logger.Debug("123123123");
-			Logger.Debug("__1243__");
-			lines = File.ReadAllText("log.txt");
-			Assert.IsTrue(lines.Contains("123123123"));
-			Assert.IsTrue(lines.Contains("__1243__"));
+			Logger.Debug(validString);
+			Logger.Debug(wrongString);
+			Assert.IsTrue(TestUtils.FileContainsString(validString));
+			Assert.IsTrue(TestUtils.FileContainsString(wrongString));
 		}
 
 	}

@@ -19,13 +19,13 @@ namespace XLogger.Tests {
 
 		[TestMethod]
 		public void FileOutputTest() {
+			TestUtils.ClearSpace();
 			LoggerConfiguration.ConfigureLoggerConfiguration(builder => {
-				builder.UseFileLogging("log.txt");
+				builder.UseFileLogging("log.log");
 			});
 			string loggedStr = TestUtils.GenerateString();
 			Logger.Info(loggedStr);
-			string fileText = File.ReadAllText("log.txt");
-			Assert.IsTrue(fileText.Contains(loggedStr));
+			Assert.IsTrue(TestUtils.FileContainsString(loggedStr));
 		}
 
 		public void CustomFileOutputTest() {

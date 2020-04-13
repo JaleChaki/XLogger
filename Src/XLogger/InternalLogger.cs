@@ -3,6 +3,7 @@ using XLogger.LogMethods;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using XLogger.Configuration;
 
 namespace XLogger {
 	internal static class InternalLogger {
@@ -13,8 +14,11 @@ namespace XLogger {
 
 		public static void LogString(string log, LogLevel level) {
 			lock (Sync) {
+				if (LoggerConfiguration.LoggerConfigurationModel.CurrentLogLevel > level) {
+					return;
+				}
 				var loggedMessage = new LogMessage(log, level);
-				string formattedMessage = LogFormatterManager.GetFormatter(log).Format(loggedMessage);
+				string formattedMessage = LogFormatterManager.GetFormatter().Format(loggedMessage);
 				FormattedLogMessage formattedResult = new FormattedLogMessage(formattedMessage, loggedMessage);
 				foreach (var i in LogMethodsManager.LogMethodsModel.Instances) {
 					i.WriteIfNeed(formattedResult);
