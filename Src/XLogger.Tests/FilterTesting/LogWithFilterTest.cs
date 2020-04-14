@@ -16,14 +16,14 @@ namespace XLogger.Tests.FilterTesting {
 		public void SingleFilterTest() {
 			TestUtils.ClearSpace();
 			string validStringMask = "123";
-			string validString = "123123123";
+			string validString = validStringMask + validStringMask;
 			string wrongString = "__1243__";
 			LoggerConfiguration.ConfigureLoggerConfiguration(builder => {
 				builder
 					.UseFileLogging("log.log", x => x.Message.Contains(validStringMask));
 			});
-			Logger.Debug(validString);
-			Logger.Debug(wrongString);
+			Logger.Info(validString);
+			Logger.Info(wrongString);
 			Assert.IsTrue(TestUtils.FileContainsString(validString));
 			Assert.IsFalse(TestUtils.FileContainsString(wrongString));
 			TestUtils.ClearSpace();
@@ -31,8 +31,8 @@ namespace XLogger.Tests.FilterTesting {
 				builder
 					.UseFileLogging("log.log");
 			});
-			Logger.Debug(validString);
-			Logger.Debug(wrongString);
+			Logger.Info(validString);
+			Logger.Info(wrongString);
 			Assert.IsTrue(TestUtils.FileContainsString(validString));
 			Assert.IsTrue(TestUtils.FileContainsString(wrongString));
 		}

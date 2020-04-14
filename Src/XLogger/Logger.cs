@@ -43,5 +43,25 @@ namespace XLogger {
 			InternalLogger.LogException(e, LogLevel.Fatal);
 		}
 
+		public static void Debug(object o) {
+			InternalLogger.LogObject(o, LogLevel.Debug);
+		}
+
+		public static void Info(object o) {
+			InternalLogger.LogObject(o, LogLevel.Info);
+		}
+
+		public static void Warn(object o) {
+			InternalLogger.LogObject(o, LogLevel.Warn);
+		}
+
+		public static void Error(object o) {
+			InternalLogger.LogObject(o, LogLevel.Error);
+		}
+
+		public static void Fatal(object o) {
+			InternalLogger.LogObject(o, LogLevel.Fatal);
+		}
+
 	}
 }

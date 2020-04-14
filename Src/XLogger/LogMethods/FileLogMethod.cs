@@ -48,6 +48,7 @@ namespace XLogger.LogMethods {
 						dir.Create();
 					}
 				}
+				Console.WriteLine(log.FormattedMessage);
 				using (var writer = new StreamWriter(File.Open(Path.Combine(FileDirectory, FileName), FileMode.Append))) {
 					foreach (string s in WaitedLogs) {
 						writer.WriteLine(s);
@@ -57,6 +58,7 @@ namespace XLogger.LogMethods {
 				}
 			}
 			catch {
+				Console.WriteLine("E BLYAT");
 				WaitedLogs.Add(log.FormattedMessage);
 			}
 		}

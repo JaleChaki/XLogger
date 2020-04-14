@@ -49,6 +49,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomLogMethodTests.cs" />
     <Compile Include="ExceptionLogTests.cs" />
     <Compile Include="FilterTesting\FilterTests.cs" />
     <Compile Include="FilterTesting\LogWithFilterTest.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestUtils.cs" />
     <Compile Include="CustomLogFormatterTest.cs" />
+    <Compile Include="ObjectLogTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

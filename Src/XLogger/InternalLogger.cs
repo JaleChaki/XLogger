@@ -42,6 +42,12 @@ namespace XLogger {
 					return;
 				}
 			}
+			string formattedObject;
+			lock (Sync) {
+				var loggedMessage = new LogMessage(obj, level);
+				formattedObject = ObjectFormatterManager.GetFormatter(obj).Format(loggedMessage);
+			}
+			LogString(formattedObject, level);
 		}
 
 	}

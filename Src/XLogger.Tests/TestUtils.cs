@@ -1,9 +1,29 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using XLogger.LogMethods;
 
 namespace XLogger.Tests {
 	internal static class TestUtils {
+
+		internal class TestableLogMethod : ILogMethod {
+
+			public delegate void WritedEvent(FormattedLogMessage msg);
+
+			public event WritedEvent Callback;
+
+			public List<FormattedLogMessage> WritedLogs;
+
+			public TestableLogMethod() {
+				WritedLogs = new List<FormattedLogMessage>();
+			}
+
+			public void Write(FormattedLogMessage log) {
+				Callback?.Invoke(log);
+				WritedLogs.Add(log);
+			}
+		}
 
 		private static readonly Random Random = new Random();
 
@@ -22,6 +42,9 @@ namespace XLogger.Tests {
 		}
 
 		public static bool FileContainsString(string searchStr, string filename = "log.log") {
+			if (!File.Exists(filename)) {
+				return false;
+			}
 			return File.ReadAllText(filename).Contains(searchStr);
 		}
 
