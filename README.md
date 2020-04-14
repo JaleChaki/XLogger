@@ -30,7 +30,27 @@ catch (Exception e) {
 }
 ```
 
-4. Custom formatters for usual logs and exceptions
+4. Object logging
+```c#
+class YourAmazingClass {
+
+	[LoggedProperty]
+	int YourProperty { get; set; }
+	
+	[LoggedProperty(Value = "your loved property")]
+	string YourAnotherProperty { get; set; }
+	
+	[LoggedProperty(IsDebug = true)]
+	string DebugField;
+}
+
+// usage
+YourAmazingClass cl = new YourAmazingClass();
+Logger.Info(cl);
+
+```
+
+5. Custom formatters for usual logs and exceptions
 ```c#
 LoggerConfiguration.ConfigureLoggerConfiguration(builder => {
 	builder.UseDefaultConfiguration()
@@ -72,3 +92,4 @@ namespace YourAmazingApp {
 	}
 }
 ```
+more docs and samples will be write later...
