@@ -37,7 +37,7 @@ class YourAmazingClass {
 	[LoggedProperty]
 	int YourProperty { get; set; }
 	
-	[LoggedProperty(Value = "your loved property")]
+	[LoggedProperty(Name = "your loved property")]
 	string YourAnotherProperty { get; set; }
 	
 	[LoggedProperty(IsDebug = true)]
