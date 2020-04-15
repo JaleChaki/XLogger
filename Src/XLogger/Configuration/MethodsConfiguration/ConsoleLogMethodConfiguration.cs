@@ -11,7 +11,7 @@ namespace XLogger.Configuration.MethodsConfiguration {
 #if USE_JSON
 		[JsonProperty("Highlighting")]
 #endif
-		public IDictionary<LogLevel, ConsoleColor> TextHighlighting { get; private set; }
+		public Dictionary<LogLevel, ConsoleColor> TextHighlighting { get; private set; }
 
 #if USE_JSON
 		[JsonConverter(typeof(StringEnumConverter))]
@@ -19,19 +19,13 @@ namespace XLogger.Configuration.MethodsConfiguration {
 		public ConsoleColor DefaultConsoleColor { get; set; } = ConsoleColor.White;
 
 		public ConsoleLogMethodConfiguration() {
-			TextHighlighting = new Dictionary<LogLevel, ConsoleColor>();
-		}
-
-		public virtual IConfiguration CreateDefaultConfiguration() {
-			var result = new ConsoleLogMethodConfiguration();
-			result.TextHighlighting = new Dictionary<LogLevel, ConsoleColor> {
+			TextHighlighting = new Dictionary<LogLevel, ConsoleColor> {
 				{ LogLevel.Debug, ConsoleColor.DarkCyan },
 				{ LogLevel.Info, ConsoleColor.DarkGreen },
 				{ LogLevel.Warn, ConsoleColor.Yellow },
 				{ LogLevel.Error, ConsoleColor.Red },
 				{ LogLevel.Fatal, ConsoleColor.Red }
 			};
-			return result;
 		}
 	}
 }

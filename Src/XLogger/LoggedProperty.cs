@@ -9,12 +9,5 @@ namespace XLogger {
 
 		public string Name { get; set; }
 
-		/*public LoggedProperty(bool isDebug = false, string name = null) {
-			IsDebug = isDebug;
-			Name = name;
-		}*/
-
-
-
 	}
 }

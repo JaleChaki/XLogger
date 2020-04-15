@@ -7,12 +7,10 @@
 
 		public string FileDirectory { get; set; }
 
-		public IConfiguration CreateDefaultConfiguration() {
-			return new FileLogMethodConfiguration {
-				FilePattern = "{0}_{1}.log",
-				GenerateNewFile = true,
-				FileDirectory = string.Empty
-			};
+		public FileLogMethodConfiguration() {
+			FilePattern = "{0}_{1}.log";
+			GenerateNewFile = true;
+			FileDirectory = string.Empty;
 		}
 	}
 }

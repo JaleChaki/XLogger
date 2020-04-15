@@ -9,15 +9,12 @@ namespace XLogger.Formatters {
 
 		public DefaultObjectFormatterConfiguration Config { get; set; }
 
-		public DefaultObjectFormatter() : this(LoggerConfiguration.GetConfiguration<DefaultObjectFormatterConfiguration>()) {
+		public DefaultObjectFormatter() : this(null) {
 
 		}
 
 		public DefaultObjectFormatter(DefaultObjectFormatterConfiguration config) {
-			if (config == null) {
-				config = new DefaultObjectFormatterConfiguration().CreateDefaultConfiguration() as DefaultObjectFormatterConfiguration;
-			}
-			Config = config;
+			Config = config ?? LoggerConfiguration.GetConfiguration<DefaultObjectFormatterConfiguration>() ?? new DefaultObjectFormatterConfiguration();
 		}
 
 		public override bool AllowFormat(object o) {

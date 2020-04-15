@@ -14,7 +14,7 @@ namespace XLogger.LogMethods {
 		protected List<string> WaitedLogs;
 
 		public FileLogMethod(string fileName = null, FileLogMethodConfiguration config = null) {
-			config = config ?? LoggerConfiguration.GetConfiguration<FileLogMethodConfiguration>() ?? (new FileLogMethodConfiguration()).CreateDefaultConfiguration() as FileLogMethodConfiguration;
+			config = config ?? LoggerConfiguration.GetConfiguration<FileLogMethodConfiguration>() ?? new FileLogMethodConfiguration();
 			fileName = fileName ?? "log.log";
 			if (config.GenerateNewFile) {
 				FileName = string.Format(config.FilePattern, DateTime.Now, fileName);

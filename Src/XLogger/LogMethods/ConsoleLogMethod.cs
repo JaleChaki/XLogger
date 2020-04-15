@@ -9,12 +9,12 @@ namespace XLogger.LogMethods {
 
 		public ConsoleLogMethodConfiguration Config { get; set; }
 
-		public ConsoleLogMethod() : this(LoggerConfiguration.GetConfiguration<ConsoleLogMethodConfiguration>()) {
+		public ConsoleLogMethod() : this(null) {
 
 		}
 
 		public ConsoleLogMethod(ConsoleLogMethodConfiguration config) {
-			Config = config ?? (new ConsoleLogMethodConfiguration()).CreateDefaultConfiguration() as ConsoleLogMethodConfiguration;
+			Config = config ?? LoggerConfiguration.GetConfiguration<ConsoleLogMethodConfiguration>() ?? new ConsoleLogMethodConfiguration();
 		}
 
 		protected ConsoleColor GetTextHightlighting(FormattedLogMessage formattedLog) {

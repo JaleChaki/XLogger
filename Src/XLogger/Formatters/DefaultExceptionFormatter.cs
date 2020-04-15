@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using XLogger.Configuration;
 using XLogger.Configuration.FormatterConfiguration;
 
 namespace XLogger.Formatters {
@@ -7,12 +8,12 @@ namespace XLogger.Formatters {
 
 		public ExceptionFormatterConfig Config { get; set; }
 
-		public DefaultExceptionFormatter() : this((new ExceptionFormatterConfig()).CreateDefaultConfiguration() as ExceptionFormatterConfig) {
+		public DefaultExceptionFormatter() : this(null) {
 
 		}
 
 		public DefaultExceptionFormatter(ExceptionFormatterConfig config) : base() {
-			Config = config;
+			Config = config ?? LoggerConfiguration.GetConfiguration<ExceptionFormatterConfig>() ?? new ExceptionFormatterConfig();
 		}
 
 		public override string Format(LogMessage log) {

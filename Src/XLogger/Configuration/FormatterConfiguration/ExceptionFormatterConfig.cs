@@ -15,22 +15,12 @@ namespace XLogger.Configuration.FormatterConfiguration {
 #endif
 		public string ExceptionStackTraceHeader { get; set; }
 
-#if USE_JSON
-		[JsonProperty("InnerExceptionHeader")]
-#endif
-		public string InnerExceptionHeader { get; set; }
-
 		public bool PrintStackTrace { get; set; }
-
-		public bool PrintInnerExceptions { get; set; }
-
-		public IConfiguration CreateDefaultConfiguration() {
-			return new ExceptionFormatterConfig {
-				ExceptionHeaderFormat = "{0}: {1}",
-				ExceptionStackTraceHeader = "StackTrace:",
-				PrintStackTrace = true,
-				PrintInnerExceptions = true
-			};
+		
+		public ExceptionFormatterConfig() {
+			ExceptionHeaderFormat = "{0}: {1}";
+			ExceptionStackTraceHeader = "StackTrace:\n{0}";
+			PrintStackTrace = true;
 		}
 	}
 }

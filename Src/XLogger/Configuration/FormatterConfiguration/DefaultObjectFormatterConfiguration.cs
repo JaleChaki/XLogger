@@ -27,20 +27,17 @@ namespace XLogger.Configuration.FormatterConfiguration {
 #endif
 		public string LoggedPropertyFormat { get; set; }
 
-
 #if USE_JSON
 		[JsonProperty]
 		[JsonConverter(typeof(StringEnumConverter))]
 #endif
 		public NamingStrategyType NamingStrategyType { get; set; }
 
-		public IConfiguration CreateDefaultConfiguration() {
-			return new DefaultObjectFormatterConfiguration {
-				NullObjectResult = "null",
-				FormattedObjectHeader = "{0}\n[\n",
-				LoggedPropertyFormat = "{0} = {1}\n",
-				FormattedObjectTail = "]"
-			};
+		public DefaultObjectFormatterConfiguration() {
+			NullObjectResult = "null";
+			FormattedObjectHeader = "{0}\n[\n";
+			LoggedPropertyFormat = "{0} = {1}\n";
+			FormattedObjectTail = "]";
 		}
 	}
 }

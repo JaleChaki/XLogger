@@ -8,12 +8,12 @@ namespace XLogger.Formatters {
 
 		public MessageFormatterConfig Config { get; set; }
 
-		public DefaultLogFormatter() : this(LoggerConfiguration.GetConfiguration<MessageFormatterConfig>()) {
+		public DefaultLogFormatter() : this(null) {
 
 		}
 
 		public DefaultLogFormatter(MessageFormatterConfig config) {
-			Config = config ?? (new MessageFormatterConfig()).CreateDefaultConfiguration() as MessageFormatterConfig;
+			Config = config ?? LoggerConfiguration.GetConfiguration<MessageFormatterConfig>() ?? new MessageFormatterConfig();
 		}
 
 		public virtual string Format(LogMessage message) {

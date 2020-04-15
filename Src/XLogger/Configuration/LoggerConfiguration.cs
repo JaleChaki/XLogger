@@ -21,7 +21,9 @@ namespace XLogger.Configuration {
 		}
 
 		public static void SetLogLevel(LogLevel level) {
-			LoggerConfigurationModel.CurrentLogLevel = level;
+			lock (InternalLogger.Sync) {
+				LoggerConfigurationModel.CurrentLogLevel = level;
+			}
 		}
 
 		public static void AddConfiguration<T>(T config) where T : IConfiguration {
