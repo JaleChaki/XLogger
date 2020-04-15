@@ -1,5 +1,4 @@
 ﻿using System;
-using XLogger;
 using XLogger.Configuration;
 using XLogger.Formatters;
 
@@ -58,7 +57,7 @@ namespace XLogger.AppTests {
 				.UseLogLevel(LogLevel.Debug)
 				.AddFormatter(new CustomExceptionFormatter());
 			});
-			
+
 			/*Logger.Info(new CustomException());
 			Logger.Info(new Exception("exp message"));*/
 

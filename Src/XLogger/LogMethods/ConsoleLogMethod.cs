@@ -1,6 +1,6 @@
-﻿using XLogger.Configuration;
+﻿using System;
+using XLogger.Configuration;
 using XLogger.Configuration.MethodsConfiguration;
-using System;
 
 namespace XLogger.LogMethods {
 	public class ConsoleLogMethod : ILogMethod {

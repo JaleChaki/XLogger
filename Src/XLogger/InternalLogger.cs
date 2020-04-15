@@ -1,9 +1,7 @@
-﻿using XLogger.Formatters;
-using XLogger.LogMethods;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 using XLogger.Configuration;
+using XLogger.Formatters;
+using XLogger.LogMethods;
 
 namespace XLogger {
 	internal static class InternalLogger {

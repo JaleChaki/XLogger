@@ -1,8 +1,7 @@
-﻿using XLogger.Configuration;
-using XLogger.Configuration.FormatterConfiguration;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Text;
+using XLogger.Configuration;
+using XLogger.Configuration.FormatterConfiguration;
 
 namespace XLogger.Formatters {
 	public class DefaultLogFormatter : IFormatter {

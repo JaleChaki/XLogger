@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace XLogger.Formatters {
 	public abstract class ObjectFormatter : IFormatter {

@@ -1,7 +1,6 @@
-﻿using XLogger.Configuration.FormatterConfiguration;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Text;
+using XLogger.Configuration.FormatterConfiguration;
 
 namespace XLogger.Formatters {
 	public class DefaultExceptionFormatter : ExceptionFormatter<Exception> {
@@ -9,7 +8,7 @@ namespace XLogger.Formatters {
 		public ExceptionFormatterConfig Config { get; set; }
 
 		public DefaultExceptionFormatter() : this((new ExceptionFormatterConfig()).CreateDefaultConfiguration() as ExceptionFormatterConfig) {
-			
+
 		}
 
 		public DefaultExceptionFormatter(ExceptionFormatterConfig config) : base() {

@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace XLogger.Formatters {
 	public abstract class ExceptionFormatter : IFormatter {
-		
+
 		internal virtual bool IsConcreteTypeFormatter => false;
 
 		internal virtual Type FormattingType => null;

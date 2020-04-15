@@ -1,10 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using XLogger.Configuration;
 using XLogger.Formatters;
 
@@ -15,7 +11,7 @@ namespace XLogger.Tests {
 		private class CustomExceptionFormatter : ExceptionFormatter<Exception> {
 
 			public const string FormattedString = "CustomExceptionLog";
-			
+
 			public override string Format(LogMessage e) {
 				return FormattedString;
 			}

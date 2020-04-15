@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace XLogger.Formatters {
 	internal static class ExceptionFormattersManager {
@@ -20,7 +19,7 @@ namespace XLogger.Formatters {
 		}
 
 		public static void AddFormatter(ExceptionFormatter formatter) {
-			if (formatter.IsConcreteTypeFormatter) {				
+			if (formatter.IsConcreteTypeFormatter) {
 				if (ConcreteExceptionFormatters.ContainsKey(formatter.FormattingType)) {
 					ConcreteExceptionFormatters[formatter.FormattingType] = formatter;
 				} else {

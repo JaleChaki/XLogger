@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace XLogger {
+﻿namespace XLogger {
 	public class FormattedLogMessage {
 
 		public readonly LogMessage PrimaryMessage;

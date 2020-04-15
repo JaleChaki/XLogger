@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XLogger", "XLogger\XLogger.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XLogger.Tests", "XLogger.Tests\XLogger.Tests.csproj", "{7B9D9D99-EEC5-43C5-B35D-E474F2F81A0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XLogger.AppTests", "XLogger.AppTests\XLogger.AppTests.csproj", "{531438A4-D76B-483B-812F-2684D795A125}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XLogger.AppTests", "XLogger.AppTests\XLogger.AppTests.csproj", "{531438A4-D76B-483B-812F-2684D795A125}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

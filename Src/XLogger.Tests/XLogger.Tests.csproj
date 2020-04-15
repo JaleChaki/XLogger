@@ -53,10 +53,12 @@
     <Compile Include="ExceptionLogTests.cs" />
     <Compile Include="FilterTesting\FilterTests.cs" />
     <Compile Include="FilterTesting\LogWithFilterTest.cs" />
+    <Compile Include="FormattersTesting\PropertyNamingStrategyTesting\PropertyNameParserTest.cs" />
+    <Compile Include="FormattersTesting\PropertyNamingStrategyTesting\NamingStrategiesTest.cs" />
     <Compile Include="LoggerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestUtils.cs" />
-    <Compile Include="CustomLogFormatterTest.cs" />
+    <Compile Include="FormattersTesting\CustomLogFormatterTest.cs" />
     <Compile Include="ObjectLogTest.cs" />
   </ItemGroup>
   <ItemGroup>

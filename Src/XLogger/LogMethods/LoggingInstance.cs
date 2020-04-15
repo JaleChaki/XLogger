@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace XLogger.LogMethods {
+﻿namespace XLogger.LogMethods {
 	internal sealed class LoggingInstance {
 
 		public ILogMethod Method { get; set; }

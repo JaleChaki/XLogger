@@ -35,13 +35,13 @@ catch (Exception e) {
 class YourAmazingClass {
 
 	[LoggedProperty]
-	int YourProperty { get; set; }
+	public int YourProperty { get; set; }
 	
-	[LoggedProperty(Name = "your loved property")]
-	string YourAnotherProperty { get; set; }
+	[LoggedProperty(Value = "your loved property")]
+	public string YourAnotherProperty { get; set; }
 	
 	[LoggedProperty(IsDebug = true)]
-	string DebugField;
+	public string DebugField;
 }
 
 // usage
@@ -53,9 +53,9 @@ Logger.Info(cl);
 5. Custom formatters for usual logs and exceptions
 ```c#
 LoggerConfiguration.ConfigureLoggerConfiguration(builder => {
-	builder.UseDefaultConfiguration()
-		.AddFormatter(new MyCustomExceptionFormatter())	// add formatter for MyCustomException
-		.AddFormatter(new MyCustomLogFormatter());
+	builder
+		.UseDefaultConfiguration()
+		.AddFormatter(new MyCustomExceptionFormatter());	// add formatter for MyCustomException
 });
 Logger.Error(new MyCustomException());
 ```

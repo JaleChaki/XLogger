@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace XLogger.Configuration.MethodsConfiguration {
+﻿namespace XLogger.Configuration.MethodsConfiguration {
 	public class FileLogMethodConfiguration : IConfiguration {
 
 		public string FilePattern { get; set; }

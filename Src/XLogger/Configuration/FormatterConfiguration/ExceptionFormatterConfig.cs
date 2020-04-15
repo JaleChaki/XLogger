@@ -1,9 +1,6 @@
 ﻿#if USE_JSON
 using Newtonsoft.Json;
 #endif
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace XLogger.Configuration.FormatterConfiguration {
 	public class ExceptionFormatterConfig : IConfiguration {

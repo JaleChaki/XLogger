@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using XLogger.Formatters;
-using XLogger.LogMethods;
 
 namespace XLogger.Configuration {
 	public static class LoggerConfiguration {

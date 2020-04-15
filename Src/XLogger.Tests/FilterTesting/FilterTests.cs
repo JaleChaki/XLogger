@@ -1,9 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace XLogger.Tests.FilterTesting {
 
@@ -21,7 +17,7 @@ namespace XLogger.Tests.FilterTesting {
 			for (LogLevel i = LogLevel.Info; i <= LogLevel.Fatal; ++i) {
 				Assert.IsFalse(filter.Filter(CreateLogMessageWithLevel(i)));
 			}
-			
+
 		}
 
 		[TestMethod]

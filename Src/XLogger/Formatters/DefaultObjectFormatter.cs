@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Reflection;
 using System.Text;
-using System.Reflection;
-using XLogger.Configuration.FormatterConfiguration;
 using XLogger.Configuration;
-using System.Linq;
+using XLogger.Configuration.FormatterConfiguration;
+using XLogger.Formatters.PropertyNamingStrategies;
 
 namespace XLogger.Formatters {
 	public class DefaultObjectFormatter : ObjectFormatter {
-		
+
 		public DefaultObjectFormatterConfiguration Config { get; set; }
 
 		public DefaultObjectFormatter() : this(LoggerConfiguration.GetConfiguration<DefaultObjectFormatterConfiguration>()) {
@@ -21,7 +19,7 @@ namespace XLogger.Formatters {
 			}
 			Config = config;
 		}
-		
+
 		public override bool AllowFormat(object o) {
 			return true;
 		}
@@ -37,7 +35,8 @@ namespace XLogger.Formatters {
 					if (a.IsDebug == true && log.Level != LogLevel.Debug) {
 						continue;
 					}
-					builder.Append(string.Format(Config.LoggedPropertyFormat, a.Name ?? prop.Name, prop.GetValue(convertedObject)));
+					string propertyName = new PropertyNamingStrategyFactory().GetStrategy(Config.NamingStrategyType).GetName(prop);
+					builder.Append(string.Format(Config.LoggedPropertyFormat, a.Name ?? propertyName, prop.GetValue(convertedObject)));
 				}
 			}
 			foreach (var prop in convertedObject.GetType().GetFields()) {
@@ -45,20 +44,15 @@ namespace XLogger.Formatters {
 					if (a.IsDebug == true && log.Level != LogLevel.Debug) {
 						continue;
 					}
-					builder.Append(string.Format(Config.LoggedPropertyFormat, a.Name ?? prop.Name, prop.GetValue(convertedObject)));
+					string propertyName = new PropertyNamingStrategyFactory().GetStrategy(Config.NamingStrategyType).GetName(prop);
+					builder.Append(string.Format(Config.LoggedPropertyFormat, a.Name ?? propertyName, prop.GetValue(convertedObject)));
 				}
 			}
 			if (string.IsNullOrEmpty(builder.ToString())) {
 				return convertedObject.ToString();
 			}
-//			string.Format(Config.FormattedObjectHeader, convertedObject.GetType().FullName);
-			/*builder.ToString();
-			Console.WriteLine(convertedObject.GetType());
-			Console.WriteLine(convertedObject.GetType().Name);
-			Console.WriteLine(convertedObject.GetType().FullName);
-			string.Format(Config.FormattedObjectTail, convertedObject.GetType().FullName);*/
-			return string.Format(Config.FormattedObjectHeader, convertedObject.GetType().FullName) + 
-				builder.ToString() + 
+			return string.Format(Config.FormattedObjectHeader, convertedObject.GetType().FullName) +
+				builder.ToString() +
 				string.Format(Config.FormattedObjectTail, convertedObject.GetType().FullName);
 		}
 	}

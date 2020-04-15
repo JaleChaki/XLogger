@@ -1,7 +1,6 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.IO;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using XLogger;
 using XLogger.Configuration;
 using XLogger.Configuration.MethodsConfiguration;
 

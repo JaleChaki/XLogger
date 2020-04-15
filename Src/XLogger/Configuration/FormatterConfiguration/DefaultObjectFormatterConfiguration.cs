@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-#if USE_JSON
+﻿#if USE_JSON
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using XLogger.Formatters.PropertyNamingStrategies;
 #endif
 
 namespace XLogger.Configuration.FormatterConfiguration {
@@ -27,6 +26,13 @@ namespace XLogger.Configuration.FormatterConfiguration {
 		[JsonProperty]
 #endif
 		public string LoggedPropertyFormat { get; set; }
+
+
+#if USE_JSON
+		[JsonProperty]
+		[JsonConverter(typeof(StringEnumConverter))]
+#endif
+		public NamingStrategyType NamingStrategyType { get; set; }
 
 		public IConfiguration CreateDefaultConfiguration() {
 			return new DefaultObjectFormatterConfiguration {
