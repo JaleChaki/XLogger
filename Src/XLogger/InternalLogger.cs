@@ -23,6 +23,10 @@ namespace XLogger {
 		}
 
 		public static void LogObject(object obj, LogLevel level) {
+			if (obj is string str) {
+				LogString(str, level);
+				return;
+			}
 			if (obj is Exception e) {
 				LogException(e, level);
 				return;

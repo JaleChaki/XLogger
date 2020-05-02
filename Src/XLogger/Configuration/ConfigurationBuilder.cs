@@ -137,10 +137,13 @@ namespace XLogger.Configuration {
 				LoggerConfiguration.LoggerConfigurationModel = BuildedConfigModel;
 				LogMethodsManager.LogMethodsModel = BuildedMethodsModel;
 				ExceptionFormattersManager.Reset();
+				ObjectFormatterManager.Reset();
 				LogFormatterManager.SetFormatter(null);
 				foreach (IFormatter f in Formatters) {
 					if (f is ExceptionFormatter ef) {
 						ExceptionFormattersManager.AddFormatter(ef);
+					} else if (f is ObjectFormatter of) {
+						ObjectFormatterManager.AddFormatter(of);
 					} else {
 						LogFormatterManager.SetFormatter(f);
 					}
