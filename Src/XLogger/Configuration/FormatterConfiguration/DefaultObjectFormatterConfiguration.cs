@@ -36,7 +36,7 @@ namespace XLogger.Configuration.FormatterConfiguration {
 		public DefaultObjectFormatterConfiguration() {
 			NullObjectResult = "null";
 			FormattedObjectHeader = "{0}\n[\n";
-			LoggedPropertyFormat = "{0} = {1}\n";
+			LoggedPropertyFormat = "\t{0} = {1}\n";
 			FormattedObjectTail = "]";
 		}
 	}
