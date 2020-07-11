@@ -25,9 +25,7 @@ namespace XLogger.Formatters {
 			StringBuilder result = new StringBuilder(string.Format(Config.ExceptionHeaderFormat, e.GetType().Name, e.Message));
 			if (Config.PrintStackTrace) {
 				result.Append("\n")
-					.Append(Config.ExceptionStackTraceHeader)
-					.Append("\n")
-					.Append(e.StackTrace);
+					.Append(string.Format(Config.ExceptionStackTraceHeader, e.StackTrace));
 			}
 			return result.ToString();
 		}
