@@ -50,7 +50,7 @@ Logger.Info(cl);
 
 ```
 
-5. Custom formatters for usual logs and exceptions
+5. Custom formatters for regular logs and exceptions
 ```c#
 LoggerConfiguration.ConfigureLoggerConfiguration(builder => {
 	builder
@@ -92,4 +92,4 @@ namespace YourAmazingApp {
 	}
 }
 ```
-more docs and samples will be write later...
+more docs and samples will be writen later...
